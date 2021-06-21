@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\cmd"
+		},
+	],
+	"settings": {
+		"files.defaultLanguage": "powershell"
+	}
+}
