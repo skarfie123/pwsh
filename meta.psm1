@@ -1,0 +1,168 @@
+<#
+.SYNOPSIS
+    Check for pwsh
+.DESCRIPTION
+    Check all modules included in readme, then check all functions in all modules have documentation
+#>
+function check {
+    [CmdletBinding()]
+    param (
+    )
+    ForEach-Object { checkReadme -folder pwsh -filetype psm1; checkFunctions } | more
+}
+
+<#
+.SYNOPSIS
+    Check all functions in pwsh modules have SYNOPSIS comment
+#>
+function checkFunctions {
+
+    [CmdletBinding()]
+    param (
+    )
+
+    Get-ChildItem "$env:GITHUB\pwsh" -Filter *.psm1 | 
+    ForEach-Object {
+        
+        $positive = 0
+        $negative = 0
+        $module = Split-Path -Path $_.FullName -LeafBase
+        Write-Output ''
+        Get-Command -Module $module | 
+        ForEach-Object {
+            $help = help $_.Name
+            $synopsis_matches = $help | Select-String -Pattern 'SYNOPSIS'
+            if ($synopsis_matches.Matches.Count -eq 0) {
+                $negative++
+                Write-Output "[91m$_[0m"
+            }
+            else {
+                $positive++
+                Write-Verbose "[92m$_[0m"
+            }
+        }
+        Write-Output "[93m${module}:[0m [92m$positive[0m - [91m$negative[0m"
+    }
+
+    
+}
+
+<#
+.SYNOPSIS
+    Check README.md includes all files
+.DESCRIPTION
+    For specified repo and file type, check all files are included in the README.md
+.EXAMPLE
+    PS C:\> checkReadme -folder pwsh -filetype psm1
+    Check for *,psm1 in pwsh repo
+#>
+function checkReadme {
+    
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory)]
+        [String]
+        $folder,
+        [String]
+        $filetype
+    )
+    if ( -Not $PSBoundParameters.ContainsKey('filetype') ) {
+        $filetype = $folder
+    }
+
+    $positive = 0
+    $negative = 0
+
+    Get-ChildItem "$env:GITHUB\$folder" -Filter *.$filetype | 
+    ForEach-Object {
+        $file = Split-Path -Path $_.FullName -Leaf
+        if ((Select-String -Path $env:GITHUB\$folder\README.md -Pattern "$file").Matches.Count -eq 0) {
+            $negative++
+            Write-Output "[91m$file[0m"
+        }
+        else {
+            $positive++
+            Write-Verbose "[92m$file[0m"
+        }
+    }
+
+    Write-Output "[95m${folder}:[0m [92m$positive[0m - [91m$negative[0m"
+    
+}
+
+
+<#
+.SYNOPSIS
+    Copies PowerShell profile from pwsh repo
+#>
+function copyprofile {
+    Copy-Item -Path $env:GITHUB\pwsh\profile.ps1 -Destination $profile.CurrentUserAllHosts
+}
+
+<#
+.SYNOPSIS
+    Edit custom pwsh modules
+.DESCRIPTION
+    sdfom
+.EXAMPLE
+    PS C:\> edit
+    Open whole pwsh repo
+.EXAMPLE
+    PS C:\> edit meta
+    Open meta.psm1
+.EXAMPLE
+    PS C:\> edit new
+    Creates and opens new.psm1
+#>
+function edit {
+    param (
+        [String]
+        $module # module to edit
+    )
+    if ($PSBoundParameters.ContainsKey('module')) {
+        code $env:GITHUB\pwsh\$module.psm1
+    }
+    else {
+        code $env:GITHUB\pwsh
+    }
+}
+
+<#
+.SYNOPSIS
+    Edit the PowerShell profile
+#>
+function editprofile {
+    code $profile.CurrentUserAllHosts
+}
+
+<#
+.SYNOPSIS
+    Print code for function
+.EXAMPLE
+    PS C:\> morepwsh reload
+    Print code for reload function
+#>
+function morepwsh {
+    param (
+        [Parameter(Mandatory)]
+        [String]
+        $function # function to print
+    )
+    (Get-Command $function).definition
+}
+
+<#
+.SYNOPSIS
+    Open the PowerShell profile location
+#>
+function whereprofile {
+    Start-Process (Split-Path -Parent $profile.CurrentUserAllHosts)
+}
+
+<#
+.SYNOPSIS
+    Opens the pwsh GitHub folder
+#>
+function wherepwsh {
+    wt -w 0 nt -d $env:GITHUB\pwsh
+}
