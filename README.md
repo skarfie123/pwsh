@@ -8,4 +8,5 @@ Currently migrating from [cmd](https://github.com/skarfie123/cmd)
 
 ## Modules
 
+- [`git`](git.psm1) - Functions for working with git
 - [`meta`](meta.psm1) - Functions for working with this repo
