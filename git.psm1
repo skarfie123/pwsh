@@ -110,7 +110,7 @@ function gcap {
     git checkout
 #>
 function gch {
-    git checkout %*
+    git checkout $args
 }
 
 <#
@@ -126,7 +126,7 @@ function gchm {
     git clone
 #>
 function gcl {
-    git clone %*
+    git clone $args
 }
 
 Remove-Alias gcm -Force
@@ -136,7 +136,14 @@ Set-Alias gcom Get-Command
     git commit amend
 #>
 function gcm {
-    git commit -m %1 --amend  
+
+    param (
+        [Parameter(Mandatory)]
+        [String]
+        $message
+    )
+
+    git commit -m $message --amend  
 }
 
 <#
