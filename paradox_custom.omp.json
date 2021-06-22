@@ -66,7 +66,7 @@
         {
             "type": "prompt",
             "alignment": "left",
-            "newline": true,
+            "newline": false,
             "segments": [
                 {
                     "type": "text",
