@@ -47,7 +47,7 @@ function fe {
     ffmpeg
 #>
 function ffm {
-    ffmpeg -hide_banner %*
+    ffmpeg -hide_banner $args
 }
 
 <#
@@ -55,7 +55,7 @@ function ffm {
     ffplay
 #>
 function ffp {
-    ffplay -hide_banner %*
+    ffplay -hide_banner $args
 }
 
 <#
@@ -63,7 +63,7 @@ function ffp {
     ffprobe
 #>
 function ffpr {
-    ffprobe -hide_banner %*
+    ffprobe -hide_banner $args
 }
 
 # https://github.com/skarfie123/FolderCompare
@@ -135,7 +135,7 @@ function pdn {
     python pip
 #>
 function pip {
-    py -m pip %*
+    py -m pip $args
 }
 
 # https://github.com/skarfie123/PythonImageViewer
