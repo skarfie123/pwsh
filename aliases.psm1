@@ -102,7 +102,7 @@ Set-Alias mdd "${env:GITHUB}\pwsh\MarkdownDiary.exe"
     more
 #>
 function m {
-    [String] $command = $args
+    [String] $command = "$args 2>&1"
     Invoke-Expression $command | more
 }
 
