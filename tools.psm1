@@ -211,6 +211,28 @@ function invisiblePause {
 
 <#
 .SYNOPSIS
+    return current IPv4 addresses for Linux, MacOS, or Windows
+.LINK
+    https://github.com/PowerShell/PowerShell/blob/master/docs/learning-powershell/create-powershell-scripts.md
+#>
+function ip {
+    $IP = if ($IsLinux -or $IsMacOS) {
+        $ipInfo = ifconfig | Select-String 'inet'
+        $ipInfo = [regex]::matches($ipInfo, 'addr:\b(?:\d{1,3}\.){3}\d{1,3}\b') | ForEach-Object value
+        foreach ($ip in $ipInfo) {
+            $ip.Replace('addr:', '')
+        }
+    }
+    else {
+        Get-NetIPAddress | Where-Object { $_.AddressFamily -eq 'IPv4' } | ForEach-Object IPAddress
+    }
+
+    # Remove loopback address from output regardless of platform
+    return $IP | Where-Object { $_ -ne '127.0.0.1' }
+}
+
+<#
+.SYNOPSIS
     kubernetes log by pod name
 #>
 function kubelog {}
