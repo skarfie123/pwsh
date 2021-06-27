@@ -425,8 +425,6 @@ function testn {
     }
 }
 
-Set-Alias timeit Measure-Command
-
 <#
 .SYNOPSIS
     create a file

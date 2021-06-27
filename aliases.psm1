@@ -115,7 +115,9 @@ Set-Alias pdf 'C:\Program Files (x86)\Adobe\Acrobat Reader DC\Reader\AcroRd32.ex
 
 <#
 .SYNOPSIS
-    Paint.NET https://www.getpaint.net/
+    Paint.NET
+.LINK
+    https://www.getpaint.net/
 #>
 function pdn {
 
@@ -145,6 +147,8 @@ Set-Alias piv "${env:GITHUB}\pwsh\PythonImageViewer.exe"
 Set-Alias pt "${env:GITHUB}\pwsh\pdfTools.exe"
 
 Set-Alias tf Get-Process
+
+Set-Alias timeit Measure-Command
 
 <#
 .SYNOPSIS
