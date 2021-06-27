@@ -224,8 +224,8 @@ function gsa {
         if (@(git status -s 2>&1).Count -ne 0) {
             Write-Output "[92m${name}:[0m"
             git status -s 2>&1
-            Pause
-            Write-Output '[1A[2K[1A' ''
+            invisiblePause
+            Write-Output ''
         }
         else {
             Write-Verbose "[92m${name}:[0m"
