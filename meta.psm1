@@ -1,14 +1,14 @@
 <#
 .SYNOPSIS
-    Check for pwsh
+    Check for pwsh and ahk
 .DESCRIPTION
-    Check all modules included in readme, then check all functions in all modules have documentation
+    Check all modules included in readme, then check all functions in all modules have documentation, then check all ahk files included in readme
 #>
 function check {
     [CmdletBinding()]
     param (
     )
-    ForEach-Object { checkReadme -folder pwsh -filetype psm1; checkFunctions } | more
+    ForEach-Object { checkReadme -folder pwsh -filetype psm1; checkFunctions; checkReadme -folder AHK -filetype ahk } | more
 }
 
 <#
@@ -21,6 +21,8 @@ function checkFunctions {
     param (
     )
 
+    load 2>&1 | Out-Null
+        
     Get-ChildItem "$env:GITHUB\pwsh" -Filter *.psm1 | 
     ForEach-Object {
         
@@ -32,7 +34,7 @@ function checkFunctions {
         ForEach-Object {
             $help = help $_.Name
             $synopsis_matches = $help | Select-String -Pattern 'SYNOPSIS'
-            if ($synopsis_matches.Matches.Count -eq 0) {
+            if ($synopsis_matches.Matches.Count -eq 0 -or (Get-Command $_.Name).definition.Trim().Length -eq 0) {
                 $negative++
                 Write-Output "[91m$_[0m"
             }
@@ -69,6 +71,8 @@ function checkReadme {
     if ( -Not $PSBoundParameters.ContainsKey('filetype') ) {
         $filetype = $folder
     }
+
+    Write-Output ''
 
     $positive = 0
     $negative = 0
