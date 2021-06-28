@@ -59,7 +59,7 @@ function gbl {
     git branch -l
 }
 
-Remove-Alias gc -Force
+Remove-Alias gc -Force -ErrorAction SilentlyContinue
 Set-Alias gco Get-Content
 <#
 .SYNOPSIS
@@ -129,7 +129,7 @@ function gcl {
     git clone $args
 }
 
-Remove-Alias gcm -Force
+Remove-Alias gcm -Force -ErrorAction SilentlyContinue
 Set-Alias gcom Get-Command
 <#
 .SYNOPSIS
@@ -171,7 +171,7 @@ function gd {
     git diff $args
 }
 
-Remove-Alias gl -Force
+Remove-Alias gl -Force -ErrorAction SilentlyContinue
 Set-Alias glo Get-Location
 <#
 .SYNOPSIS
@@ -181,7 +181,7 @@ function gl {
     git log $args
 }
 
-Remove-Alias gp -Force
+Remove-Alias gp -Force -ErrorAction SilentlyContinue
 Set-Alias gpr Get-ItemProperty
 <#
 .SYNOPSIS

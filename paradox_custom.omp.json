@@ -48,7 +48,8 @@
                     "foreground": "#100e23",
                     "background": "#efff0f",
                     "properties": {
-                        "prefix": " \uE235 "
+                        "prefix": " \uE235 ",
+                        "display_mode": "context"
                     }
                 },
                 {

@@ -13,3 +13,4 @@ Currently migrating from [cmd](https://github.com/skarfie123/cmd)
 - [`meta`](meta.psm1) - Functions for working with this repo
 - [`shortcuts`](shortcuts.psm1) - Shortcuts for various apps and locations
 - [`tools`](tools.psm1) - Various tools
+- [`venv`](venv.psm1) - Functions for working with Python venvs
