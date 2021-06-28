@@ -23,7 +23,7 @@ function checkFunctions {
 
     load 2>&1 | Out-Null
         
-    Get-ChildItem "$env:GITHUB\pwsh" -Filter *.psm1 | 
+    Get-ChildItem $pwsh -Filter *.psm1 | 
     ForEach-Object {
         
         $positive = 0
@@ -100,7 +100,7 @@ function checkReadme {
     Copies PowerShell profile from pwsh repo
 #>
 function copyprofile {
-    Copy-Item -Path $env:GITHUB\pwsh\profile.ps1 -Destination $profile.CurrentUserAllHosts
+    Copy-Item -Path $pwsh\profile.ps1 -Destination $profile.CurrentUserAllHosts
 }
 
 <#
@@ -124,10 +124,10 @@ function edit {
         $module # module to edit
     )
     if ($PSBoundParameters.ContainsKey('module')) {
-        code $env:GITHUB\pwsh\$module.psm1
+        code $pwsh\$module.psm1
     }
     else {
-        code $env:GITHUB\pwsh
+        code $pwsh
     }
 }
 
@@ -168,5 +168,5 @@ function whereprofile {
     Opens the pwsh GitHub folder
 #>
 function wherepwsh {
-    wt -w 0 nt -d $env:GITHUB\pwsh
+    wt -w 0 nt -d $pwsh
 }

@@ -392,7 +392,7 @@ function restartExplorer {
 #>
 function splash {
     Clear-Host
-    Get-Content $env:GITHUB\pwsh\rpc.txt
+    Get-Content $pwsh\rpc.txt
 }
 
 <#
