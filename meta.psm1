@@ -141,6 +141,14 @@ function editprofile {
 
 <#
 .SYNOPSIS
+    List executables in pwsh folder
+#>
+function helpexe {
+    Get-ChildItem $pwsh *.exe
+}
+
+<#
+.SYNOPSIS
     Print code for function
 .EXAMPLE
     PS C:\> morepwsh reload
