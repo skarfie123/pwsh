@@ -4,7 +4,7 @@ A collection of my powershell functions. Each module must be imported in the Pow
 
 [profile.ps1](profile.ps1) is a copy of my profile.
 
-Currently migrating from [cmd](https://github.com/skarfie123/cmd)
+Migrated from [cmd](https://github.com/skarfie123/cmd)
 
 ## Modules
 
