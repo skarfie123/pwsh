@@ -181,5 +181,33 @@ function tkp {
 
 }
 
+<#
+.SYNOPSIS
+    Windows Terminal here
+#>
+function wth {
+
+    param (
+        [String]
+        $folder = '.'
+    )
+
+    wt -w 0 nt -d $folder
+}
+
+<#
+.SYNOPSIS
+    Windows Terminal Quake here
+#>
+function wtq {
+
+    param (
+        [String]
+        $folder = '.'
+    )
+
+    wt -w _quake nt -d $folder
+}
+
 # https://github.com/ytdl-org/youtube-dl
 Set-Alias ydl "${env:GITHUB}\pwsh\youtube-dl.exe"

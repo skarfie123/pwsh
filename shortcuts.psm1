@@ -77,19 +77,3 @@ function taskbar {
 function ch {
     code .
 }
-
-<#
-.SYNOPSIS
-    Windows Terminal here
-#>
-function wth {
-    wt -w 0 nt -d .
-}
-
-<#
-.SYNOPSIS
-    Windows Terminal Quake here
-#>
-function wtq {
-    wt -w _quake nt -d .
-}
