@@ -42,6 +42,7 @@ function ahk {
 #>
 function boot {
     wt -w _quake nt `; nt pwsh -c 'cls && check && pause' `; nt -d $env:GITHUB pwsh -c gsa
+    pwsh -windowstyle hidden -c MonitorBattery
 }
 
 <#
@@ -255,6 +256,27 @@ function matrix {
 
 <#
 .SYNOPSIS
+    Monitor Battery Level
+#>
+function MonitorBattery {
+    
+    [CmdletBinding()]
+    param (
+    )
+    while ($true) {
+        $battery = battery
+        if ($battery -le 15) {
+            notify 'Warning' "Low Battery Level: $battery" Warning
+        }
+        else {
+            Write-Output $battery
+        }
+        Start-Sleep 60
+    }
+}
+
+<#
+.SYNOPSIS
     convert to mp3
 #>
 function mp3 {
@@ -267,6 +289,87 @@ function mp3 {
 #>
 function mp4 {
     convert 'mp4' @args
+}
+
+enum NotifyIcon {
+    Application
+    Asterisk
+    Error
+    Exclamation
+    Hand
+    Information
+    Question
+    Shield
+    Warning
+    WinLogo
+}
+
+<#
+.SYNOPSIS
+    Notification
+#>
+function notify {
+    
+    param (
+        [Parameter(Mandatory)]
+        [String]
+        $title,
+        [Parameter(Mandatory)]
+        [String]
+        $message,
+        [NotifyIcon]
+        $icon
+    )
+    
+    if ($PSBoundParameters.ContainsKey('icon')) {
+        $system_icon = [system.drawing.systemicons]::$icon
+    }
+    else {
+        $path = (Get-Process -Id $PID).Path
+        Write-Verbose $path
+        $system_icon = [System.Drawing.Icon]::ExtractAssociatedIcon($path)
+    }
+
+    Add-Type -AssemblyName System.Windows.Forms
+    if ($null -eq $global:pwshNotifyIcon) {
+        $global:pwshNotifyIcon = New-Object System.Windows.Forms.NotifyIcon
+    }
+
+    $events = "BalloonTipClosed", "BalloonTipClicked", "MouseDoubleClick"
+
+    $action = {
+        
+        #Perform  cleanup actions on balloon tip
+    
+        $global:pwshNotifyIcon.dispose()
+    
+        foreach ($item in $events) {
+            Unregister-Event -SourceIdentifier $item
+    
+            Remove-Job -Name $item
+        }
+    
+        Remove-Variable -Name pwshNotifyIcon -Scope Global
+  
+    }
+
+    foreach ($item in $events) {
+        [void](Register-ObjectEvent -InputObject $global:pwshNotifyIcon -EventName $item -SourceIdentifier $item -Action $action)
+    }
+        
+    $global:pwshNotifyIcon.BalloonTipText = $message
+    $global:pwshNotifyIcon.Text = "pwsh - $title - $message"
+    $global:pwshNotifyIcon.Icon = $system_icon
+    $global:pwshNotifyIcon.BalloonTipTitle = $title
+    switch ($icon) {
+        Error { $large_icon = [System.Windows.Forms.ToolTipIcon]::Error }
+        Information { $large_icon = [System.Windows.Forms.ToolTipIcon]::Info }
+        Warning { $large_icon = [System.Windows.Forms.ToolTipIcon]::Warning }
+        Default { $large_icon = [System.Windows.Forms.ToolTipIcon]::None }
+    }
+    $global:pwshNotifyIcon.BalloonTipIcon = $large_icon
+    $global:pwshNotifyIcon.Visible = $True
+    $global:pwshNotifyIcon.ShowBalloonTip(5000)
 }
 
 <#

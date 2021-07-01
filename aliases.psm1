@@ -8,6 +8,14 @@ function b {
     bell
 }
 
+<#
+.SYNOPSIS
+    return battery level
+#>
+function battery {
+    return (Get-CimInstance Win32_Battery).EstimatedChargeRemaining
+}
+
 Set-Alias cra create-react-app
 
 <#
