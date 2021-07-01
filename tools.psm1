@@ -307,6 +307,8 @@ enum NotifyIcon {
 <#
 .SYNOPSIS
     Notification
+.LINK
+    https://mcpmag.com/articles/2017/09/07/creating-a-balloon-tip-notification-using-powershell.aspx
 #>
 function notify {
     
