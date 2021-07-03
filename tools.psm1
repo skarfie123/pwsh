@@ -265,7 +265,17 @@ function MonitorBattery {
     )
     while ($true) {
         $battery = battery
-        if ($battery -le 15) {
+        $status = (Get-CimInstance Win32_Battery).BatteryStatus
+        $file = "$env:USERPROFILE\battery.log"
+        
+        if (-not(Test-Path $file)) {
+            Write-Output 'Time,EstimatedChargeRemaining,BatteryStatus' >> $file
+        }
+        Write-Output "$(Get-Date),$battery,$status" >> $file
+        
+        # https://docs.microsoft.com/en-us/windows/win32/cimwin32prov/win32-battery
+        # for my laptop 1 is discharging, 2 is charging
+        if ($battery -le 15 -and $status -eq 1) {
             notify 'Warning' "Low Battery Level: $battery" Warning
         }
         else {
@@ -337,7 +347,7 @@ function notify {
         $global:pwshNotifyIcon = New-Object System.Windows.Forms.NotifyIcon
     }
 
-    $events = "BalloonTipClosed", "BalloonTipClicked", "MouseDoubleClick"
+    $events = 'BalloonTipClosed', 'BalloonTipClicked', 'MouseDoubleClick'
 
     $action = {
         
