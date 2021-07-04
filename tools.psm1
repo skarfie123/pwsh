@@ -39,6 +39,8 @@ function ahk {
 <#
 .SYNOPSIS
     boot script (opens wt with a few tasks)
+.DESCRIPTION
+    create a shortcut in the startup folder that targets `"C:\Program Files\PowerShell\7\pwsh.exe" -c boot`
 #>
 function boot {
     wt -w _quake nt `; nt pwsh -c 'cls && check && pause' `; nt -d $env:GITHUB pwsh -c gsa
