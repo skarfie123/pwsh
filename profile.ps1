@@ -6,7 +6,13 @@ Import-Module posh-git
 Import-Module oh-my-posh
 Set-PoshPrompt -Theme $pwsh\paradox_custom.omp.json
 
-Set-PSReadLineOption -PredictionSource History
+Set-PSReadLineOption -PredictionSource History -Colors @{
+    Operator         = "`e[38;5;208m"
+    Parameter        = "`e[38;5;208m"
+    InlinePrediction = "`e[48;5;4m"
+}
+Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 
 function load {
 
