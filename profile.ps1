@@ -6,6 +6,8 @@ Import-Module posh-git
 Import-Module oh-my-posh
 Set-PoshPrompt -Theme $pwsh\paradox_custom.omp.json
 
+Set-PSReadLineOption -PredictionSource History
+
 function load {
 
     [CmdletBinding()]
