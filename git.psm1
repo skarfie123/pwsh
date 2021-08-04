@@ -220,6 +220,11 @@ function gsa {
     Write-Output ''
     Get-ChildItem -Directory | ForEach-Object {
         $name = $_.Name
+        if (Test-Path (Join-Path $name '.gsa_ignore')) {
+            Write-Verbose "Ignored $name"
+            return
+        }
+
         Set-Location $name
         if (@(git status -s 2>&1).Count -ne 0) {
             Write-Output "[92m${name}:[0m"
@@ -228,7 +233,7 @@ function gsa {
             Write-Output ''
         }
         else {
-            Write-Verbose "[92m${name}:[0m"
+            Write-Verbose "[92m${name}[0m"
         }
         Set-Location ..
     }
