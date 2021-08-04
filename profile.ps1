@@ -1,4 +1,5 @@
-$pwsh = "$env:GITHUB\pwsh"
+$skarfie123 = "$env:GITHUB\skarfie123"
+$pwsh = "$skarfie123\pwsh"
 $venv = "${env:USERPROFILE}\venv"
 $env:VIRTUAL_ENV_DISABLE_PROMPT = 1
 

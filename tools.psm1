@@ -25,14 +25,15 @@ function ahk {
         [String]
         $module # module to edit
     )
+    $AHK = "$skarfie123\AHK"
     if ($PSBoundParameters.ContainsKey('module')) {
-        if (-not(Test-Path -Path "$env:GITHUB\AHK\$module.ahk" -PathType Leaf)) {
-            Write-Output "#Include, $module.ahk">>$env:GITHUB\AHK\main.ahk
+        if (-not(Test-Path -Path "$AHK\$module.ahk" -PathType Leaf)) {
+            Write-Output "#Include, $module.ahk">>$AHK\main.ahk
         }
-        code $env:GITHUB\AHK\$module.ahk
+        code $AHK\$module.ahk
     }
     else {
-        code $env:GITHUB\AHK
+        code $AHK
     }
 }
 
@@ -43,8 +44,11 @@ function ahk {
     create a shortcut in the startup folder that targets `"C:\Program Files\PowerShell\7\pwsh.exe" -c boot`
 #>
 function boot {
-    wt -w _quake nt `; nt pwsh -c 'cls && check && pause' `; nt -d $env:GITHUB pwsh -c gsa
-    pwsh -windowstyle hidden -c MonitorBattery
+    wt -w _quake nt `; nt --title Check pwsh -c 'cls && check && pause' `; nt -d $env:GITHUB --title GitHub pwsh -c gsa`; nt -d $skarfie123 --title Skarfie123 pwsh -c gsa
+    if ($env:COMPUTERNAME -match '-LT$') {
+        # if the computer is a laptop
+        pwsh -windowstyle hidden -c MonitorBattery
+    }
 }
 
 <#
@@ -70,7 +74,7 @@ function chromeTotal {
     https://gist.github.com/skarfie123/ab1d4c728e6ffd1d8c94876891178430
 #>
 function col {
-    cmd /c $env:GITHUB\gists\colours.cmd
+    cmd /c $skarfie123\gists\colours.cmd
 }
 
 <#

@@ -77,10 +77,10 @@ function checkReadme {
     $positive = 0
     $negative = 0
 
-    Get-ChildItem "$env:GITHUB\$folder" -Filter *.$filetype | 
+    Get-ChildItem "$skarfie123\$folder" -Filter *.$filetype | 
     ForEach-Object {
         $file = Split-Path -Path $_.FullName -Leaf
-        if ((Select-String -Path $env:GITHUB\$folder\README.md -Pattern "$file").Matches.Count -eq 0) {
+        if ((Select-String -Path $skarfie123\$folder\README.md -Pattern "$file").Matches.Count -eq 0) {
             $negative++
             Write-Output "[91m$file[0m"
         }

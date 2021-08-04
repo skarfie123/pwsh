@@ -75,7 +75,7 @@ function ffpr {
 }
 
 # https://github.com/skarfie123/FolderCompare
-Set-Alias foc "${env:GITHUB}\pwsh\FolderCompare.exe" 
+Set-Alias foc "$pwsh\FolderCompare.exe" 
 
 Set-Alias ifconfig ipconfig
 
@@ -103,7 +103,7 @@ function lst {
 }
 
 # https://github.com/skarfie123/MarkdownDiary
-Set-Alias mdd "${env:GITHUB}\pwsh\MarkdownDiary.exe" 
+Set-Alias mdd "$pwsh\MarkdownDiary.exe" 
 
 <#
 .SYNOPSIS
@@ -149,10 +149,10 @@ function pip {
 }
 
 # https://github.com/skarfie123/PythonImageViewer
-Set-Alias piv "${env:GITHUB}\pwsh\PythonImageViewer.exe"
+Set-Alias piv "$pwsh\PythonImageViewer.exe"
 
 # https://github.com/skarfie123/pdfTools
-Set-Alias pt "${env:GITHUB}\pwsh\pdfTools.exe"
+Set-Alias pt "$pwsh\pdfTools.exe"
 
 Set-Alias tf Get-Process
 
@@ -218,4 +218,4 @@ function wtq {
 }
 
 # https://github.com/ytdl-org/youtube-dl
-Set-Alias ydl "${env:GITHUB}\pwsh\youtube-dl.exe"
+Set-Alias ydl "$pwsh\youtube-dl.exe"
