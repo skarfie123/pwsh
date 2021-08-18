@@ -121,7 +121,7 @@ Set-Alias np notepad
 # https://notepad-plus-plus.org/
 Set-Alias npp notepad++
 
-Set-Alias pdf 'C:\Program Files (x86)\Adobe\Acrobat Reader DC\Reader\AcroRd32.exe'
+Set-Alias pdf 'C:\Program Files\Adobe\Acrobat DC\Acrobat\Acrobat.exe'
 
 <#
 .SYNOPSIS

@@ -1,5 +1,13 @@
 ﻿<#
 .SYNOPSIS
+    VS Code here
+#>
+function ch {
+    code .
+}
+
+<#
+.SYNOPSIS
     open chrome extensions folder
 #>
 function chromeExt {
@@ -56,6 +64,14 @@ function jl {
 
 <#
 .SYNOPSIS
+    cd to skarfie123 folder
+#>
+function s {
+    Set-Location $skarfie123
+}
+
+<#
+.SYNOPSIS
     open startup folder
 #>
 function startup {
@@ -68,12 +84,4 @@ function startup {
 #>
 function taskbar {
     fe "${env:AppData}\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar"
-}
-
-<#
-.SYNOPSIS
-    VS Code here
-#>
-function ch {
-    code .
 }

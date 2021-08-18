@@ -45,6 +45,10 @@ function ahk {
 #>
 function boot {
     wt -w _quake nt `; nt --title Check pwsh -c 'cls && check && pause' `; nt -d $env:GITHUB --title GitHub pwsh -c gsa`; nt -d $skarfie123 --title Skarfie123 pwsh -c gsa
+
+    Set-Location $skarfie123\AHK
+    .\main.ahk
+
     if ($env:COMPUTERNAME -match '-LT$') {
         # if the computer is a laptop
         pwsh -windowstyle hidden -c MonitorBattery
