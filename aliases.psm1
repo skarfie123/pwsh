@@ -75,7 +75,9 @@ function ffpr {
 }
 
 # https://github.com/skarfie123/FolderCompare
-Set-Alias foc "$pwsh\FolderCompare.exe" 
+Set-Alias foc "$pwsh\FolderCompare.exe"
+
+Set-Alias gvol Get-Volume
 
 Set-Alias ifconfig ipconfig
 
