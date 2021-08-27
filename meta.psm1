@@ -94,15 +94,6 @@ function checkReadme {
     
 }
 
-
-<#
-.SYNOPSIS
-    Copies PowerShell profile from pwsh repo
-#>
-function copyProfile {
-    Copy-Item -Path $pwsh\profile.ps1 -Destination $profile.CurrentUserAllHosts
-}
-
 <#
 .SYNOPSIS
     Edit custom pwsh modules
