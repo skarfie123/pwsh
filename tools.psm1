@@ -166,6 +166,18 @@ function extract {
 
 <#
 .SYNOPSIS
+    find (unix)
+.LINK
+    https://github.com/mikemaccana/powershell-profile/blob/master/unix.ps1
+#>
+function find($name) {
+    Get-ChildItem -Recurse -Filter "*${name}*" -ErrorAction SilentlyContinue | ForEach-Object {
+        Write-Output($PSItem.FullName)
+    }
+}
+
+<#
+.SYNOPSIS
     extract archive contents here
 #>
 function extracth {
@@ -460,18 +472,6 @@ function pstree {
 
 <#
 .SYNOPSIS
-    find (unix)
-.LINK
-    https://github.com/mikemaccana/powershell-profile/blob/master/unix.ps1
-#>
-function find($name) {
-    Get-ChildItem -Recurse -Filter "*${name}*" -ErrorAction SilentlyContinue | ForEach-Object {
-        Write-Output($PSItem.FullName)
-    }
-}
-
-<#
-.SYNOPSIS
     count total RAM (for all or for specified)
 #>
 function ramTotal {
@@ -528,6 +528,24 @@ function splash {
 #>
 function sudo() {
     Invoke-Elevated @args
+}
+
+<#
+.SYNOPSIS
+    add a suffix to each file in the folder
+#>
+function suffix {
+
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory)]
+        [String]
+        $suffix
+    )
+
+    foreach ($file in Get-ChildItem) {
+        Rename-Item $file.Name ($file.BaseName + $suffix + $file.Extension)
+    }
 }
 
 <#
