@@ -1,4 +1,7 @@
-﻿<#
+﻿# https://www.7-zip.org/
+Set-Alias 7z 'C:\Program Files\7-Zip\7z.exe'
+
+<#
 .SYNOPSIS
     `bell`
 #>
@@ -75,7 +78,7 @@ function ffpr {
 }
 
 # https://github.com/skarfie123/FolderCompare
-Set-Alias foc "$pwsh\FolderCompare.exe" 
+Set-Alias foc "$pwsh\FolderCompare.exe"
 
 Set-Alias ifconfig ipconfig
 
