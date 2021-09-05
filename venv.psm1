@@ -12,8 +12,8 @@ function delvenv {
         $name
     )
 
-    Remove-Item "$venv\$name" -Recurse -ErrorAction SilentlyContinue
-    Remove-Item "$venv\$name.desc" -ErrorAction SilentlyContinue
+    Remove-Item (Join-Path $venv $name) -Recurse -ErrorAction SilentlyContinue
+    Remove-Item (Join-Path $venv "$name.desc") -ErrorAction SilentlyContinue
 }
 
 <#
@@ -28,12 +28,12 @@ function helpvenv {
     )
 
     if ($PSBoundParameters.ContainsKey('name')) {
-        Get-Content "$venv\$name.desc" -ErrorAction SilentlyContinue
+        Get-Content (Join-Path $venv "$name.desc") -ErrorAction SilentlyContinue
         return
     }
 
     Get-ChildItem $venv -Directory | ForEach-Object {
-        $description = Get-Content "$venv\$($_.Name).desc" -ErrorAction SilentlyContinue
+        $description = Get-Content (Join-Path $venv "$($_.Name).desc") -ErrorAction SilentlyContinue
         Write-Output "[95m$($_.Name)[0m $description"
     }
 }
@@ -60,7 +60,7 @@ function venv {
     Set-Location $current
 
     if ($PSBoundParameters.ContainsKey('description')) {
-        Write-Output $description > "$venv\$name.desc"
+        Write-Output $description > (Join-Path $venv $name.desc)
     }
 }
 
@@ -76,7 +76,7 @@ function venva {
         $name
     )
 
-    & "$venv\$name\Scripts\Activate.ps1"
+    & (Join-Path $venv $name Scripts Activate.ps1)
 }
 
 <#
@@ -90,7 +90,7 @@ function venvah {
         $name = 'env'
     )
 
-    & "$name\Scripts\Activate.ps1"
+    & (Join-Path $name Scripts Activate.ps1)
 }
 
 <#
