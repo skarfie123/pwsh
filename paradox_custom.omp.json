@@ -53,6 +53,17 @@
                     }
                 },
                 {
+                    "type": "aws",
+                    "style": "powerline",
+                    "powerline_symbol": "\uE0B0",
+                    "foreground": "#ffffff",
+                    "background": "#FFA400",
+                    "properties": {
+                        "prefix": " \uE7AD ",
+                        "template": "{{.Profile}}{{if .Region}}@{{.Region}}{{end}}"
+                    }
+                },
+                {
                     "type": "exit",
                     "style": "powerline",
                     "powerline_symbol": "\uE0B0",
@@ -67,7 +78,7 @@
         {
             "type": "prompt",
             "alignment": "left",
-            "newline": false,
+            "newline": true,
             "segments": [
                 {
                     "type": "text",
