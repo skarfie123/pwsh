@@ -39,7 +39,10 @@
                     "style": "powerline",
                     "powerline_symbol": "\uE0B0",
                     "foreground": "#000000",
-                    "background": "#ff8f33"
+                    "background": "#ff8f33",
+                    "properties": {
+                        "display_status": true
+                    }
                 },
                 {
                     "type": "python",
