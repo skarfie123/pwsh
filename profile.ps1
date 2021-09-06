@@ -29,6 +29,8 @@ function load {
         Write-Verbose "[91m$($_.BaseName)[0m"
         Import-Module -Name $_.FullName -Force -Global
     }
+
+    load_secret
 }
 
 load

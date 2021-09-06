@@ -262,6 +262,18 @@ function kubelog {}
 
 <#
 .SYNOPSIS
+    load secret script if it exists
+#>
+function load_secret {
+
+    $secret_load = (Join-Path $pwsh secret.ps1)
+    if (Test-Path $secret_load) {
+        & $secret_load
+    }
+}
+
+<#
+.SYNOPSIS
     digital rain
 #>
 function matrix {
