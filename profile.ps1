@@ -1,11 +1,14 @@
-$skarfie123 = "$env:GITHUB\skarfie123"
-$pwsh = "$skarfie123\pwsh"
-$venv = "${env:USERPROFILE}\venv"
+if (-not(Test-Path variable:env:GITHUB)) {
+    $env:GITHUB = Join-Path $HOME GitHub
+}
+$skarfie123 = Join-Path $env:GITHUB skarfie123
+$pwsh = Join-Path $skarfie123 pwsh
+$venv = Join-Path $HOME venv
 $env:VIRTUAL_ENV_DISABLE_PROMPT = 1
 
 Import-Module posh-git
 Import-Module oh-my-posh
-Set-PoshPrompt -Theme $pwsh\paradox_custom.omp.json
+Set-PoshPrompt -Theme (Join-Path $pwsh paradox_custom.omp.json)
 
 Set-PSReadLineOption -PredictionSource History -Colors @{
     Operator         = "`e[38;5;208m"
@@ -26,6 +29,8 @@ function load {
         Write-Verbose "[91m$($_.BaseName)[0m"
         Import-Module -Name $_.FullName -Force -Global
     }
+
+    load_secret
 }
 
 load

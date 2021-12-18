@@ -39,7 +39,10 @@
                     "style": "powerline",
                     "powerline_symbol": "\uE0B0",
                     "foreground": "#000000",
-                    "background": "#ff8f33"
+                    "background": "#ff8f33",
+                    "properties": {
+                        "display_status": true
+                    }
                 },
                 {
                     "type": "python",
@@ -50,6 +53,17 @@
                     "properties": {
                         "prefix": " \uE235 ",
                         "display_mode": "context"
+                    }
+                },
+                {
+                    "type": "aws",
+                    "style": "powerline",
+                    "powerline_symbol": "\uE0B0",
+                    "foreground": "#ffffff",
+                    "background": "#FFA400",
+                    "properties": {
+                        "prefix": " \uE7AD ",
+                        "template": "{{.Profile}}{{if .Region}}@{{.Region}}{{end}}"
                     }
                 },
                 {
@@ -67,7 +81,7 @@
         {
             "type": "prompt",
             "alignment": "left",
-            "newline": false,
+            "newline": true,
             "segments": [
                 {
                     "type": "text",
