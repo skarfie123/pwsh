@@ -225,6 +225,16 @@ function helloWorld {
 
 <#
 .SYNOPSIS
+    horizontal flip an image
+#> 
+function hflip {
+    $image = [System.Drawing.image]::FromFile( $_ )
+    $image.rotateflip('Rotate90FlipNone', 'jpeg')
+    $image.save($_)
+}
+
+<#
+.SYNOPSIS
     pause and then hide trace
 #>
 function invisiblePause {
