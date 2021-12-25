@@ -496,7 +496,7 @@ function pipUninstallAll {
 #>
 function pstree {
     $ProcessesById = @{}
-    foreach ($Process in (Get-WMIObject -Class Win32_Process)) {
+    foreach ($Process in (Get-WmiObject -Class Win32_Process)) {
         $ProcessesById[$Process.ProcessId] = $Process
     }
 
@@ -664,6 +664,20 @@ function testn {
 
 <#
 .SYNOPSIS
+    check for TODO like comments
+#>
+function todo {
+
+    param (
+        [String]
+        $path = '.'
+    )
+
+    Get-ChildItem $path -Recurse | Select-String -Pattern '((#|//) (\?|TODO|FIXME|XXX|BUG|HACK))|\[ \]|\[x\]'
+}
+
+<#
+.SYNOPSIS
     create a file
 #>
 function touch {
@@ -681,6 +695,7 @@ function touch {
         New-Item $file -type file
     }
 }
+
 <#
 .SYNOPSIS
     ydl video description
