@@ -79,11 +79,8 @@ Set-Alias foc "$pwsh\FolderCompare.exe"
 
 Set-Alias gvol Get-Volume
 
-Set-Alias ifconfig ipconfig
 
-<#
-.SYNOPSIS
-    interactive python
+Set-Alias gvol Get-Volume
 #>
 function ipy {
     ptipython $args
@@ -215,6 +212,12 @@ function wtq {
         [String]
         $folder = '.'
     )
+
+    wt -w _quake nt -d $folder
+}
+
+# https://github.com/ytdl-org/youtube-dl
+Set-Alias ydl "$pwsh\youtube-dl.exe"
 
     wt -w _quake nt -d $folder
 }

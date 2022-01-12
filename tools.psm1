@@ -64,6 +64,56 @@ function bell {
 
 <#
 .SYNOPSIS
+    Export chrome tabs to file
+#>
+function chrome-export {
+    param (
+        [Parameter(Mandatory)]
+        [String]
+        $name 
+    )
+    osascript (Join-Path $pwsh chrome_export.applescript) | Out-File (Join-Path $HOME .chrome_export "$name.chrome")
+    chrome-list $name
+}
+Set-Alias ce chrome-export
+
+<#
+.SYNOPSIS
+    List chrome exports
+#>
+function chrome-list {
+
+    param (
+        [String]
+        $name
+    )
+    
+    if (-not($PSBoundParameters.ContainsKey('name'))) {
+        Get-ChildItem (Join-Path $HOME .chrome_export '*.chrome') | ForEach-Object { Write-Output $_.BaseName }
+    }
+    else {
+        Get-Content (Join-Path $HOME .chrome_export "$name.chrome")
+    }
+    
+}
+Set-Alias cl chrome-list
+
+<#
+.SYNOPSIS
+    Load chrome tabs from file
+#>
+function chrome-open {
+    param (
+        [Parameter(Mandatory)]
+        [String]
+        $name 
+    )
+    Get-Content (Join-Path $HOME .chrome_export "$name.chrome") | ForEach-Object { open $_ }
+}
+Set-Alias co chrome-open
+
+<#
+.SYNOPSIS
     count total RAM used by chrome.exe instances
 #>
 function chromeTotal {
@@ -165,6 +215,18 @@ function extract {
 
 <#
 .SYNOPSIS
+    find (unix)
+.LINK
+    https://github.com/mikemaccana/powershell-profile/blob/master/unix.ps1
+#>
+function find($name) {
+    Get-ChildItem -Recurse -Filter "*${name}*" -ErrorAction SilentlyContinue | ForEach-Object {
+        Write-Output($PSItem.FullName)
+    }
+}
+
+<#
+.SYNOPSIS
     extract archive contents here
 #>
 function extracth {
@@ -212,6 +274,16 @@ function helloWorld {
 
 <#
 .SYNOPSIS
+    horizontal flip an image
+#> 
+function hflip {
+    $image = [System.Drawing.image]::FromFile( $_ )
+    $image.rotateflip('Rotate90FlipNone', 'jpeg')
+    $image.save($_)
+}
+
+<#
+.SYNOPSIS
     pause and then hide trace
 #>
 function invisiblePause {
@@ -246,6 +318,18 @@ function ip {
     kubernetes log by pod name
 #>
 function kubelog {}
+
+<#
+.SYNOPSIS
+    load secret script if it exists
+#>
+function load_secret {
+
+    $secret_load = (Join-Path $pwsh secret.ps1)
+    if (Test-Path $secret_load) {
+        & $secret_load
+    }
+}
 
 <#
 .SYNOPSIS
@@ -459,18 +543,6 @@ function pstree {
 
 <#
 .SYNOPSIS
-    find (unix)
-.LINK
-    https://github.com/mikemaccana/powershell-profile/blob/master/unix.ps1
-#>
-function find($name) {
-    Get-ChildItem -Recurse -Filter "*${name}*" -ErrorAction SilentlyContinue | ForEach-Object {
-        Write-Output($PSItem.FullName)
-    }
-}
-
-<#
-.SYNOPSIS
     count total RAM (for all or for specified)
 #>
 function ramTotal {
@@ -531,6 +603,24 @@ function sudo() {
 
 <#
 .SYNOPSIS
+    add a suffix to each file in the folder
+#>
+function suffix {
+
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory)]
+        [String]
+        $suffix
+    )
+
+    foreach ($file in Get-ChildItem) {
+        Rename-Item $file.Name ($file.BaseName + $suffix + $file.Extension)
+    }
+}
+
+<#
+.SYNOPSIS
     check if filename is valid
 .LINK
     https://stackoverflow.com/a/36408199/6023007
@@ -573,6 +663,20 @@ function testn {
 
 <#
 .SYNOPSIS
+    check for TODO like comments
+#>
+function todo {
+
+    param (
+        [String]
+        $path = '.'
+    )
+
+    Get-ChildItem $path -Recurse | Select-String -Pattern '((#|//) (\?|TODO|FIXME|XXX|BUG|HACK))|\[ \]|\[x\]'
+}
+
+<#
+.SYNOPSIS
     create a file
 #>
 function touch {
@@ -590,6 +694,7 @@ function touch {
         New-Item $file -type file
     }
 }
+
 <#
 .SYNOPSIS
     ydl video description

@@ -77,10 +77,10 @@ function checkReadme {
     $positive = 0
     $negative = 0
 
-    Get-ChildItem "$skarfie123\$folder" -Filter *.$filetype | 
+    Get-ChildItem (Join-Path $skarfie123 $folder) -Filter *.$filetype | 
     ForEach-Object {
         $file = Split-Path -Path $_.FullName -Leaf
-        if ((Select-String -Path $skarfie123\$folder\README.md -Pattern "$file").Matches.Count -eq 0) {
+        if ((Select-String -Path (Join-Path $skarfie123 $folder README.md) -Pattern "$file").Matches.Count -eq 0) {
             $negative++
             Write-Output "[91m$file[0m"
         }
@@ -92,15 +92,6 @@ function checkReadme {
 
     Write-Output "[95m${folder}:[0m [92m$positive[0m - [91m$negative[0m"
     
-}
-
-
-<#
-.SYNOPSIS
-    Copies PowerShell profile from pwsh repo
-#>
-function copyProfile {
-    Copy-Item -Path $pwsh\profile.ps1 -Destination $profile.CurrentUserAllHosts
 }
 
 <#
@@ -124,7 +115,7 @@ function edit {
         $module # module to edit
     )
     if ($PSBoundParameters.ContainsKey('module')) {
-        code $pwsh\$module.psm1
+        code (Join-Path $pwsh "$module.psm1")
     }
     else {
         code $pwsh
