@@ -49,8 +49,7 @@ function boot {
     Set-Location $skarfie123\AHK
     .\main.ahk
 
-    if ($env:COMPUTERNAME -match '-LT$') {
-        # if the computer is a laptop
+    if ($env:MONITOR_BATTERY -eq 'TRUE') {
         pwsh -windowstyle hidden -c MonitorBattery
     }
 }
@@ -412,7 +411,7 @@ function pipUninstallAll {
 #>
 function pstree {
     $ProcessesById = @{}
-    foreach ($Process in (Get-WMIObject -Class Win32_Process)) {
+    foreach ($Process in (Get-WmiObject -Class Win32_Process)) {
         $ProcessesById[$Process.ProcessId] = $Process
     }
 
