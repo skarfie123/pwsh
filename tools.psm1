@@ -315,6 +315,22 @@ function ip {
 
 <#
 .SYNOPSIS
+    keep running a command
+.LINK
+    https://github.com/microsoft/terminal/issues/4379#issuecomment-905112832
+#>
+function Keep-Alive {
+
+    while ($TRUE) {
+        Invoke-Expression $args
+        Start-Sleep -Seconds 1
+        Write-Output 'Command ended. Press Enter to reload.'
+        Read-Host
+    }
+}
+
+<#
+.SYNOPSIS
     kubernetes log by pod name
 #>
 function kubelog {}
