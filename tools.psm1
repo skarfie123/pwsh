@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
     check if admin
 .LINK
@@ -174,6 +174,8 @@ function ejectFailed {
     )
 
     wevtutil qe System /q:"*[System[(EventID=225)]]" /c:$count /f:text /rd:true
+
+    Write-Output "Now for ``abc.exe`` you need to open powershell admin and run ``Stop-Process -Name abc``"
 }
 
 <#
@@ -266,7 +268,7 @@ function grepv($regex) {
 
 <#
 .SYNOPSIS
-    👋
+    ??
 #>
 function helloWorld {
     Write-Output 'Hello World![1A[2K[1A'
