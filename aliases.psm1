@@ -118,6 +118,8 @@ Set-Alias np notepad
 # https://notepad-plus-plus.org/
 Set-Alias npp notepad++
 
+Set-Alias open Invoke-Item
+
 Set-Alias pdf 'C:\Program Files\Adobe\Acrobat DC\Acrobat\Acrobat.exe'
 
 <#
