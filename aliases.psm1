@@ -117,6 +117,8 @@ function m {
     Invoke-Expression $command | more
 }
 
+Set-Alias marktext 'C:\Users\rahul\AppData\Local\Programs\Mark Text\Mark Text.exe'
+
 Set-Alias np notepad
 
 # https://notepad-plus-plus.org/
