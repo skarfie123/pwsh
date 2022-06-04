@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
     check if admin
 .LINK
@@ -49,8 +49,7 @@ function boot {
     Set-Location $skarfie123\AHK
     .\main.ahk
 
-    if ($env:COMPUTERNAME -match '-LT$') {
-        # if the computer is a laptop
+    if ($env:MONITOR_BATTERY -eq 'TRUE') {
         pwsh -windowstyle hidden -c MonitorBattery
     }
 }
@@ -175,6 +174,8 @@ function ejectFailed {
     )
 
     wevtutil qe System /q:"*[System[(EventID=225)]]" /c:$count /f:text /rd:true
+
+    Write-Output "Now for ``abc.exe`` you need to open powershell admin and run ``Stop-Process -Name abc``"
 }
 
 <#
@@ -267,7 +268,7 @@ function grepv($regex) {
 
 <#
 .SYNOPSIS
-    👋
+    ??
 #>
 function helloWorld {
     Write-Output 'Hello World![1A[2K[1A'
@@ -312,6 +313,22 @@ function ip {
 
     # Remove loopback address from output regardless of platform
     return $IP | Where-Object { $_ -ne '127.0.0.1' }
+}
+
+<#
+.SYNOPSIS
+    keep running a command
+.LINK
+    https://github.com/microsoft/terminal/issues/4379#issuecomment-905112832
+#>
+function Keep-Alive {
+
+    while ($TRUE) {
+        Invoke-Expression $args
+        Start-Sleep -Seconds 1
+        Write-Output 'Command ended. Press Enter to reload.'
+        Read-Host
+    }
 }
 
 <#

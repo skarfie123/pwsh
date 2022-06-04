@@ -1,7 +1,4 @@
-﻿# https://www.7-zip.org/
-Set-Alias 7z 'C:\Program Files\7-Zip\7z.exe'
-
-<#
+﻿<#
 .SYNOPSIS
     `bell`
 #>
@@ -80,11 +77,10 @@ function ffpr {
 # https://github.com/skarfie123/FolderCompare
 Set-Alias foc "$pwsh\FolderCompare.exe"
 
-Set-Alias ifconfig ipconfig
+Set-Alias gvol Get-Volume
 
-<#
-.SYNOPSIS
-    interactive python
+
+Set-Alias gvol Get-Volume
 #>
 function ipy {
     ptipython $args
@@ -123,6 +119,8 @@ Set-Alias np notepad
 
 # https://notepad-plus-plus.org/
 Set-Alias npp notepad++
+
+Set-Alias open Invoke-Item
 
 Set-Alias pdf 'C:\Program Files\Adobe\Acrobat DC\Acrobat\Acrobat.exe'
 
