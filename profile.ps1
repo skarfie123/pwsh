@@ -35,4 +35,8 @@ function load {
 
 load
 
+if ($IsMacOS) {
+    $(/usr/local/bin/brew shellenv) | Invoke-Expression
+}
+
 splash
