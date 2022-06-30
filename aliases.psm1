@@ -74,9 +74,6 @@ function ffpr {
     ffprobe -hide_banner $args
 }
 
-# https://github.com/skarfie123/FolderCompare
-Set-Alias foc "$pwsh\FolderCompare.exe"
-
 Set-Alias gvol Get-Volume
 
 
@@ -104,9 +101,6 @@ function lst {
 
     Get-ChildItem "*.$type"
 }
-
-# https://github.com/skarfie123/MarkdownDiary
-Set-Alias mdd "$pwsh\MarkdownDiary.exe" 
 
 <#
 .SYNOPSIS
@@ -154,12 +148,6 @@ function pdn {
 function pip {
     py -m pip $args
 }
-
-# https://github.com/skarfie123/PythonImageViewer
-Set-Alias piv "$pwsh\PythonImageViewer.exe"
-
-# https://github.com/skarfie123/pdfTools
-Set-Alias pt "$pwsh\pdfTools.exe"
 
 Set-Alias tf Get-Process
 

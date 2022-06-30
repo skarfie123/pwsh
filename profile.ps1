@@ -35,4 +35,10 @@ function load {
 
 load
 
+if ($IsMacOS) {
+    $(/usr/local/bin/brew shellenv) | Invoke-Expression
+}
+
+$env:PATH += (Join-Path $HOME .local bin)
+
 splash
