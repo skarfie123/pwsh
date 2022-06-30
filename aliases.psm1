@@ -80,7 +80,11 @@ Set-Alias foc "$pwsh\FolderCompare.exe"
 Set-Alias gvol Get-Volume
 
 
-Set-Alias gvol Get-Volume
+Set-Alias ifconfig ipconfig
+
+<#
+.SYNOPSIS
+    interactive python
 #>
 function ipy {
     ptipython $args
