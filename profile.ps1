@@ -6,9 +6,12 @@ $pwsh = Join-Path $skarfie123 pwsh
 $venv = Join-Path $HOME venv
 $env:VIRTUAL_ENV_DISABLE_PROMPT = 1
 
+if ($IsLinux){
+    $env:PATH = $env:PATH+":/home/linuxbrew/.linuxbrew/bin"
+}
+
 Import-Module posh-git
-Import-Module oh-my-posh
-Set-PoshPrompt -Theme (Join-Path $pwsh paradox_custom.omp.json)
+oh-my-posh init pwsh --config (Join-Path $pwsh paradox_custom.omp.json) | Invoke-Expression
 
 Set-PSReadLineOption -PredictionSource History -Colors @{
     Operator         = "`e[38;5;208m"
