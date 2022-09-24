@@ -212,5 +212,10 @@ function wtq {
     wt -w _quake nt -d $folder
 }
 
-# https://github.com/ytdl-org/youtube-dl
-Set-Alias ydl "$pwsh\youtube-dl.exe"
+<#
+.SYNOPSIS
+    https://github.com/ytdl-org/youtube-dl
+#>
+function ydl {
+    youtube-dl $args
+}
