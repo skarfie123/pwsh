@@ -6,8 +6,8 @@ $pwsh = Join-Path $skarfie123 pwsh
 $venv = Join-Path $HOME venv
 $env:VIRTUAL_ENV_DISABLE_PROMPT = 1
 
-if ($IsLinux){
-    $env:PATH = $env:PATH+":/home/linuxbrew/.linuxbrew/bin"
+if ($IsLinux) {
+    $env:PATH = $env:PATH + ':/home/linuxbrew/.linuxbrew/bin'
 }
 
 Import-Module posh-git
@@ -42,6 +42,8 @@ if ($IsMacOS) {
     $(/usr/local/bin/brew shellenv) | Invoke-Expression
 }
 
-$env:PATH += ";"+(Join-Path $HOME .local bin)
+$env:PATH += ';' + (Join-Path $HOME .local bin)
+
+quicksearch shell pwsh | Invoke-Expression
 
 splash
