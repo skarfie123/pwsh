@@ -184,6 +184,8 @@ function tkp {
 
 }
 
+Set-Alias which Get-Command
+
 <#
 .SYNOPSIS
     Windows Terminal here
