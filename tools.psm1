@@ -44,7 +44,7 @@ function ahk {
     create a shortcut in the startup folder that targets `"C:\Program Files\PowerShell\7\pwsh.exe" -c boot`
 #>
 function boot {
-    wt -w _quake nt `; nt --title Check pwsh -c 'cls && check && pause' `; nt -d $env:GITHUB --title GitHub pwsh -c gsa`; nt -d $skarfie123 --title Skarfie123 pwsh -c gsa
+    wt -w _quake nt `; nt --title Check pwsh -c 'cls && check' `; nt -d $env:GITHUB --title GitHub pwsh -c gsa`; nt -d $skarfie123 --title Skarfie123 pwsh -c gsa
 
     Set-Location $skarfie123\AHK
     .\main.ahk
@@ -330,12 +330,6 @@ function Keep-Alive {
         Read-Host
     }
 }
-
-<#
-.SYNOPSIS
-    kubernetes log by pod name
-#>
-function kubelog {}
 
 <#
 .SYNOPSIS

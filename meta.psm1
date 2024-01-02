@@ -44,9 +44,10 @@ function checkFunctions {
             }
         }
         Write-Output "[93m${module}:[0m [92m$positive[0m - [91m$negative[0m"
+        if ($negative -gt 0) {
+            Pause
+        }
     }
-
-    
 }
 
 <#
@@ -91,7 +92,9 @@ function checkReadme {
     }
 
     Write-Output "[95m${folder}:[0m [92m$positive[0m - [91m$negative[0m"
-    
+    if ($negative -gt 0) {
+        Pause
+    }
 }
 
 <#
