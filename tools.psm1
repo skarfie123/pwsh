@@ -695,6 +695,23 @@ function todo {
 
 <#
 .SYNOPSIS
+    Toggle sound between speakers and headphones
+#>
+function toggle-sound {
+
+    $current = Get-AudioDevice -List | Where-Object Type -Like 'Playback' | Where-Object default -EQ $true
+    $headphones = 'Headphones (Realtek USB2.0 Audio)'
+    $speakers = 'M27Q (AMD High Definition Audio Device)'
+    if ($current.Name -eq $headphones) {
+        Get-AudioDevice -List | Where-Object Type -Like 'Playback' | Where-Object name -EQ $speakers | Set-AudioDevice -Verbose
+        return
+    }
+    Get-AudioDevice -List | Where-Object Type -Like 'Playback' | Where-Object name -EQ $headphones | Set-AudioDevice -Verbose
+    
+}
+
+<#
+.SYNOPSIS
     create a file
 #>
 function touch {
