@@ -162,6 +162,35 @@ function count {
     return @(Invoke-Expression "$args").Count
 }
 
+
+<#
+.SYNOPSIS
+    count files
+#>
+function CountFiles {
+    param(
+        [string]$Path
+    )
+
+    Get-ChildItem -Path $Path -Recurse | Measure-Object | Select-Object -ExpandProperty Count
+}
+
+
+<#
+.SYNOPSIS
+    count files by extension
+#>
+function CountFilesByExtension {
+    param(
+        [string]$Path
+    )
+
+    Get-ChildItem -Path $Path -Recurse -File | Group-Object Extension | ForEach-Object {
+        Write-Host "Extension: $($_.Group[0].Extension) - Count: $($_.Count)"
+    }
+}
+
+
 <#
 .SYNOPSIS
     print event(s) corresponding to failed ejection(s)
